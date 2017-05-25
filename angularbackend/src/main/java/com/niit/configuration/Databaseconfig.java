@@ -33,8 +33,8 @@ public class Databaseconfig {
 	    DriverManagerDataSource dataSource = new DriverManagerDataSource();
 	    dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 	dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
-	    dataSource.setUsername("nanthini");
-	dataSource.setPassword("mahi123");
+	    dataSource.setUsername("mahendran");
+	dataSource.setPassword("thillai123");
 	    return dataSource;
 	}
 	private Properties getHibernateProperties() {

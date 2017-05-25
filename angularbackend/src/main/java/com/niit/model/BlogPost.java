@@ -1,4 +1,5 @@
 package com.niit.model;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,38 +15,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
 @Entity
-
+@Table(name="blogpost")
 public class BlogPost {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 private int id;
 private Date createdOn;
 @ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-@JoinColumn(name="createdby_id")
+@JoinColumn(name="created_by_id")
 private User createdBy;
-@Column(nullable=false)
 private String title;
 @Lob
-@Column(name="blogbody",nullable=false)
+@Column(name="blog_body")
 private String body;
+
 private boolean approved;
-@OneToMany(mappedBy="blogpost",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+
+@OneToMany(mappedBy="blogPost",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 @JsonIgnore
-private List<BlogComment> blogcomments=new ArrayList<BlogComment>();
+private List<BlogComment> blogComments=new ArrayList<BlogComment>();
 
-
-
-public List<BlogComment> getBlogcomments() {
-	return blogcomments;
-}
-public void setBlogcomments(List<BlogComment> blogcomments) {
-	this.blogcomments = blogcomments;
-}
 public int getId() {
 	return id;
 }
@@ -82,6 +75,11 @@ public boolean isApproved() {
 public void setApproved(boolean approved) {
 	this.approved = approved;
 }
-
+public List<BlogComment> getBlogComments() {
+	return blogComments;
+}
+public void setBlogComments(List<BlogComment> blogComments) {
+	this.blogComments = blogComments;
+}
 
 }

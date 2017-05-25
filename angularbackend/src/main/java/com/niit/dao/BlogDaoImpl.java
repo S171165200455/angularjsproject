@@ -24,7 +24,6 @@ private SessionFactory sessionFactory;
 		session.close();
 		
 	}
-	@Override
 	public List<BlogPost> getBlogPosts(int approved) {
 		Session session=sessionFactory.openSession();
 		Transaction trans=session.beginTransaction();
@@ -33,17 +32,17 @@ private SessionFactory sessionFactory;
 		trans.commit();
 		session.close();
 		return blogPosts;
-	}
+	}	
 	
-	public BlogPost getBlogPost(int id) {
+	
+	public BlogPost getBlogPostById(int id) {
 		Session session=sessionFactory.openSession();
 		Transaction trans=session.beginTransaction();
 		BlogPost blogPost=(BlogPost)session.get(BlogPost.class, id);
 		trans.commit();
 		session.close();
 		return blogPost;
-		} 
-	
+	}
 	public void addBlogComment(BlogComment blogComment) {
 		Session session=sessionFactory.openSession();
 		Transaction trans=session.beginTransaction();
@@ -51,29 +50,25 @@ private SessionFactory sessionFactory;
 		session.flush();
 		trans.commit();
 		session.close();
+		
 	}
-	
-	public List<BlogComment> getBlogComment(int blogPostId) {
+	public List<BlogComment> getBlogComments(int blogPostId) {
 		Session session=sessionFactory.openSession();
 		Transaction trans=session.beginTransaction();
 		BlogPost blogPost=(BlogPost)session.get(BlogPost.class, blogPostId);
-		List<BlogComment> blogcomments=blogPost.getBlogcomments();
+		List<BlogComment> blogComments=blogPost.getBlogComments();
 		trans.commit();
 		session.close();
-		return blogcomments;
-
+		return blogComments;
+		
 	}
-	public void update(BlogPost blogpost) {
+	public void update(BlogPost blogPost) {
 		Session session=sessionFactory.openSession();
 		Transaction trans=session.beginTransaction();
-		session.update(blogpost);
+		session.update(blogPost);
 		session.flush();
 		trans.commit();
 		session.close();
+		
 	}
-	
-
-
-	
-
 }
